@@ -5,6 +5,7 @@ CS 180 Homework from Fall 2018
 
 
 | homwork number | score |
+|------|-------|
 | HW 1 | 60/60 | 
 | HW 2 | 60/60 | 
 | HW 3 | 60/60 | 
