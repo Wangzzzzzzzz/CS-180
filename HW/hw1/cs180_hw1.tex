@@ -1,0 +1,191 @@
+\documentclass[11pt]{amsart}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{exercise}
+\usepackage{float}
+
+\restylefloat{table}
+\theoremstyle{theorem}
+\newtheorem{exercise}{Exercise}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Math Macros
+\newcommand\N{\mathbb{N}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\R{\mathbb{R}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%homework macros
+\newcommand\duedate{Oct 11, 2018} %Change this accordingly
+\newcommand\homeworknumber{1} %Change this accordingly
+
+\author{Wang, Zheng (404855295)}
+%\email{your.email.address.here@ucla.edu}
+
+\title{CS 180 Homework \#\homeworknumber
+\\ Due \duedate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+	
+\begin{exercise}
+Exercise 2, Page 22
+\end{exercise}
+	
+\begin{proof}
+\textbf{True}\\
+
+Suppose towards contardiction that there exists some stable matching $ S $ such that $ (m,w) \notin S$.\\\\
+
+Since all of the man and women must be mathched, then there exists pair $ (m, w_2) \in S$, where $ w_2 $ is some woman lower in $ m $'s list than $ w $ (as $ w $ ranks first in $ m $'s list ).
+
+Also, there exists pair $ (m_2, w)  \in S$, where $ m_2 $ is some man lower in $ w $'s list than $ m $ (as $ m $ ranks the first in $ w $'s list).\\\\
+
+Thus, take the pairs $ (m,w') $ and $ (m', w) $. Since it is known that $ m $ prefers $ w $ to $ w'$ and $ w $ prefers $ m $ to $ m' $, this is an instance of instalbe match, a contradiction to the assumption that the matching is stable. $ \qedhere $
+\end{proof}
+\hfill
+\begin{exercise}
+Exercise 3, Page 22 
+\end{exercise}
+
+\begin{proof}
+\textbf{There exist a case where there is no stable pair} \\\\
+An example is when there is 3 slots. \\
+Suppose $ A $ network has program $ a_1, a_2, a_3 $, each with rating $ 1,3,5 $; $ B $ network has program $ b_1, b_2 ,b_3 $, each with rating $ 2,4,6 $.\\\\
+This is summarized in the following table:\begin{table}
+	\begin{tabular}{|c|c|l|l|c|l|l|}
+		\hline
+		\multicolumn{1}{|l|}{\textbf{Network}} & \multicolumn{3}{c|}{\textbf{A}}                                            & \multicolumn{3}{c|}{\textbf{B}}                                            \\ \hline
+		Program                                & \multicolumn{1}{l|}{$a_1$} & $a_2$                    & $a_3$                    & \multicolumn{1}{l|}{$b_1$} & $b_2$                    & $b_3$                    \\ \hline
+		Rate                                   & 1                        & \multicolumn{1}{c|}{3} & \multicolumn{1}{c|}{5} & 2                        & \multicolumn{1}{c|}{4} & \multicolumn{1}{c|}{6} \\ \hline
+	\end{tabular}
+\label{Table 1}
+\end{table}
+\textit{Claim}: For all schedules $ T $ used by $ A $, There exists a schedule $ S $ for $ B $ such that $ B $ can win 2 out of 3 slots.
+
+\textit{Proof:} Let $ b_3 $ compete against $ a_1 $, $ b_2 $ compete agianst $ a_2 $, and $ b_1 $ compete against $ a_3 $.\\
+
+\textit{Claim}: For all schedules $ S' $ used by $ B $, There exists a schedule $ T' $ for $ A $ such that $ A $ can win 2 out of 3 slots.
+
+\textit{Proof:} Let $ a_3 $ compete against $ b_2 $, $ a_2 $ compete agianst $ b_1 $, and $ a_1 $ compete against $ b_3 $.\\
+
+Since both of the network has a potential to win 2 out of 3 slots, which ever network wins less than 2 slots can shift the scheduel to win 2 slots, and make the other network winning only 1 slot. But this then make the other network become capable of shifting its scheduel and win two slots. This cycle can continue forever\\\\
+Thus there is no stable matching.
+\end{proof}
+\hfill
+\begin{exercise}
+Exercise 8, Page 27
+\end{exercise}
+
+\begin{proof}
+There exists a set of preferenc list such that a switch would imporve the partner of a women who switched preferencs:\\
+Suppose the list of all men is: $ (m_1, m_2, m_3) $ and algorithm choose man in this order, the list of all women is : $ (w_1, w_2, w_3) $, and $ w_2 $ is the women who shifts perference.\\
+Suppose the perference list for man is:
+\[
+\begin{cases}
+	m_1 : (w_2, w_1, w_3)\\
+	m_2 : (w_2, w_3, w_1)\\
+	m_3 : (w_3, w_2, w_1)
+\end{cases}\]\\
+and for women, the \textbf{true} preference list is :
+\[\begin{cases}
+w_1:(m_1,m_2,m_3)\\
+w_2: (m_3,m_2,m_1)\\
+w_3:(m_2, m_3, m_1)
+\end{cases}
+\]\\
+Then before $ w $ shift her preference, the algorithm does the following:\\
+
+In the first round, $ m_1 $ propose and get engaged to $ w_2 $; then $ m_2 $ propose to $ w_2 $ and get engaged, setting $ m_1 $ free; then $ m_3 $ propose to $ w_3 $ and get engaged. 
+
+In the second round, $ m_1 $ propose to $ w_1 $ and get engaged.
+
+This result in the pairing:\begin{align*}
+m_1 &\longleftrightarrow w_1\\
+m_2 &\longleftrightarrow w_2\\
+m_3 &\longleftrightarrow w_3
+\end{align*}\\
+After $ w_2 $ shift preference list to $ (m_3,m_1,m_2) $, the algorithm does the following:
+
+In the first round, $ m_1 $ propose to $ w_2 $ and get engaged; then $ m_2 $ propose to $ w_2 $ and get reject, so $ m_2 $ remains free; then $ m_3 $ propose to $ w_3 $ and get engaged.
+
+In the second round, $ m_2 $ propose to $ w_3 $ and get engaged, setting $ m_3 $ free.
+
+In the third round, $ m_3 $ propose to $ w_2 $ and get engaged, setting $ m_1 $ free.
+
+In the fourth round, $ m_1 $ propose to $ w_1 $ and get engaged.
+
+The resulting pairing is:
+\begin{align*}
+m_1 &\longleftrightarrow w_1\\
+m_2 &\longleftrightarrow w_3\\
+m_3 &\longleftrightarrow w_2\\
+\end{align*}
+Then, $ w_2 $ ends up with an improved partner.
+\end{proof}
+\hfill
+\begin{exercise}
+	Exercise 4, Page 67
+\end{exercise}
+
+
+The list in ascending order is:
+\begin{align*}
+g_1(n) &= 2^{\sqrt{\log n}}\\
+g_3(n) &= n(\log n)^3\\
+g_4(n) &= n^{4/3}\\
+g_5(n) &= n^{\log n}\\
+g_2(n) &= 2^n\\
+g_7(n) &= 2^{n^2}\\
+g_6(n) &=2^{2^n}
+\end{align*}\\\\
+\textbf{Exercise 5(a)}
+
+\begin{proof}
+\hfill\\
+Let $ P(n) $ be the statment such that:\[ P(n): ``1+2+\cdots + n = \frac{n(n+1)}{2}" \]
+$ P(1) $ says that $ 1 = ((1+1) \cdot 1)/2$, which is true.\\
+Aussme that $ P(n)$ is true, then we have
+\[
+1 + 2 + \cdots + n + (n+1) = \frac{n(n+1)}{2}+ \frac{2n+2}{2} = \frac{(n+1)(n+2)}{2}
+\]
+Thus, $ P(n+1) $ holds. By induction, $ P(n) $ holds for all $ n \in \N $.
+\end{proof}\hfill\\
+\textbf{Exercise 5(b)}
+
+\begin{proof}
+Let $ P(n) $ be the statement such that:\[ P(n): ``1 \times 2 + 2\times 3 + 3\times 4 + \cdots + n(n+1) = \frac{n(n+1)(n+2)}{3}" \]
+$ P(1) $ says that $ 1\times 2 = \frac{1\cdot(1+1)\cdot (1+2)}{3} $, which is true.\\
+Assume that $ P(n) $ holds, then we have
+\begin{align*}
+1 \times 2 + 2\times 3 + \cdots + n(n+1) + (n+1)(n+2) =& \frac{n(n+1)(n+2)}{3} + \frac{3(n+1)(n+2)}{3} \\
+&= \frac{(n+1)(n+2)(n+3)}{3}
+\end{align*}
+Thus, $ P(n+1) $ holds. By induction, $ P(n) $ holds for all $ n \in \N $.
+\end{proof}\hfill\\\\\\\\\\
+\textbf{Exercise 6}\hfill\\
+Using the mega-small step used in class, we take $ m $-step as a mega-step.
+
+In the class, we discussed and algorithm that set $ m  = \sqrt{n} $. However, it is obvious that as we try more mega-steps, The total number of tries increases. This is because we the number of tries after the first egg breaks at a perticualr mega-step remains constant.
+
+Thus the lower bound for this algorithm is $ m $. In the worst case, the algorithm will run at about $ 2m $ time.
+
+However, we could see that if we go $ m $ step in the first mega-step try, but then go up by only $ m-1 $ after the egg passes the first mega-step try, and $ m-2 $ after passing the second mega-step try...(In general we go up by $ m-k $ after passing the $ k^{th} $ mega-step try), then we would always endup with $ (m-k) + k  = m $ tries whenever the first egg breaks. Thus, this should improve the algorithm discussed in the class.\\
+
+So, when there are 200 steps, using this idea we end up getting that $$ m + (m-1) + (m-2) + \cdots + 1 = \frac{m(m+1)}{2} = 200 $$ So we have to take 20 tries (since the excat solution is 19.5) to solve this problem. Comparing to the algorithm that takes $ m=\sqrt{n} $, which should takes about 28 tries, this is an improvment.\\
+
+Thus for $ n $ steps, we generalize the equation for 200-step case and get this equation: $$ \frac{m(m+1)}{2} = n $$ It has solution $ \frac{\sqrt{1+8n}-1}{2} $. Therefore, in general, we will have to take $ \lceil \frac{\sqrt{1+8n}-1}{2} \rceil $ steps to find out the answer. With this general formula, we can now proof that our algorithm is better than the one we discussed in class:\[
+\lim_{n \rightarrow \infty} \frac{T_{class}(n)}{T_{new}(n)} = \frac{2\sqrt{n}}{\frac{\sqrt{1+8n}-1}{2}} = \sqrt{2}
+\]
+Since this limit is larger than 1. The algorithm discussed in the class will run longer than our new algorithm at large $ n $, so this new algorithm will have better performance.
+\end{document}
